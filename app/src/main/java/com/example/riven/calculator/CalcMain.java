@@ -235,10 +235,8 @@ public class CalcMain extends AppCompatActivity implements View.OnClickListener 
                     String o = ops.removeLast();
                     double newNum = getResult(n2, n1, o);
                     nums.add(newNum);
-                    Log.d("New Num", Double.toString(newNum));
                 }
             }else{
-                Log.i("Add op", i);
                 ops.add(i);
             }
         }
