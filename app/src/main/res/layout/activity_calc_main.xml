@@ -26,7 +26,8 @@
             android:textSize="40sp"
             android:textStyle="bold"
             android:id="@+id/display"
-            android:backgroundTint="#4c4545" />
+            android:backgroundTint="#4c4545"
+            android:textColor="#ffffff" />
 
     </LinearLayout>
 
@@ -74,11 +75,6 @@
             android:clickable="true"
             android:contextClickable="false"
             android:enabled="true" />
-
-
-        <TableLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"></TableLayout>
 
         <Button
             android:id="@+id/eight"

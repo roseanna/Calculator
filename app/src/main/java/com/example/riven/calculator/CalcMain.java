@@ -2,6 +2,7 @@ package com.example.riven.calculator;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -9,11 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.*;
 
-import java.sql.Array;
-import java.util.ArrayList;
-
 public class CalcMain extends AppCompatActivity implements View.OnClickListener {
-    public String toSolve = "";
+    public String toSolve = "0";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -61,7 +59,7 @@ public class CalcMain extends AppCompatActivity implements View.OnClickListener 
         del.setOnClickListener(this);
         dec.setOnClickListener(this);
 
-
+        setText();
     }
 
     public void setText(){
@@ -195,12 +193,20 @@ public class CalcMain extends AppCompatActivity implements View.OnClickListener 
     public void solving(){
         Deque<Double> nums = new ArrayDeque<Double>();
         Deque<String> ops = new ArrayDeque<String>();
-
         String[] parts = toSolve.split(" ");
         for (String i: parts){
             if(isNumeric(i)){
                 nums.add(Double.parseDouble(i));
+                if (ops.size() > 0 && (ops.getLast().equals("*") || ops.getLast().equals("/"))){
+                    double n1 = nums.removeLast();
+                    double n2 = nums.removeLast();
+                    String o = ops.removeLast();
+                    double newNum = getResult(n2, n1, o);
+                    nums.add(newNum);
+                    Log.d("New Num", Double.toString(newNum));
+                }
             }else{
+                Log.i("Add op", i);
                 ops.add(i);
             }
         }
@@ -208,11 +214,13 @@ public class CalcMain extends AppCompatActivity implements View.OnClickListener 
             double num1 = nums.pop();
             double num2 = nums.pop();
             String op = ops.pop();
-            double result = getResult(num1, num2, op);
+            double result = getResult(num2, num1, op);
             nums.add(result);
         }
         Double finalResult = nums.pop();
         toSolve = finalResult.toString();
+        if (toSolve.endsWith(".0"))
+            toSolve = toSolve.substring(0, toSolve.length()-2);
     }
 
     public double getResult(double num1, double num2, String op){
