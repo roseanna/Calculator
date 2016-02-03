@@ -12,6 +12,7 @@ import java.util.*;
 
 public class CalcMain extends AppCompatActivity implements View.OnClickListener {
     public String toSolve = "0";
+    public boolean enter = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -72,10 +73,14 @@ public class CalcMain extends AppCompatActivity implements View.OnClickListener 
         Toast.makeText(getApplicationContext(), "+", Toast.LENGTH_SHORT).show();
         switch (v.getId()){
             case R.id.zero:
+                if (enter == true)
+                    break;
                 if (!(toSolve.equals("0") || toSolve.endsWith(" 0")))
                     toSolve += "0";
                 break;
             case R.id.one:
+                if (enter == true)
+                    break;
                 if (toSolve.equals("0"))
                     toSolve = "1";
                 else if(toSolve.length() > 1 && toSolve.endsWith(" 0"))
@@ -84,6 +89,8 @@ public class CalcMain extends AppCompatActivity implements View.OnClickListener 
                     toSolve += "1";
                 break;
             case R.id.two:
+                if (enter == true)
+                    break;
                 if (toSolve.equals("0"))
                     toSolve = "2";
                 else if(toSolve.length() > 1 && toSolve.endsWith(" 0"))
@@ -92,6 +99,8 @@ public class CalcMain extends AppCompatActivity implements View.OnClickListener 
                     toSolve += "2";
                 break;
             case R.id.three:
+                if (enter == true)
+                    break;
                 if (toSolve.equals("0"))
                     toSolve = "3";
                 else if(toSolve.length() > 1 && toSolve.endsWith(" 0"))
@@ -100,6 +109,8 @@ public class CalcMain extends AppCompatActivity implements View.OnClickListener 
                     toSolve += "3";
                 break;
             case R.id.four:
+                if (enter == true)
+                    break;
                 if (toSolve.equals("0"))
                     toSolve = "4";
                 else if(toSolve.length() > 1 && toSolve.endsWith(" 0"))
@@ -108,6 +119,8 @@ public class CalcMain extends AppCompatActivity implements View.OnClickListener 
                     toSolve += "4";
                 break;
             case R.id.five:
+                if (enter == true)
+                    break;
                 if (toSolve.equals("0"))
                     toSolve = "5";
                 else if(toSolve.length() > 1 && toSolve.endsWith(" 0"))
@@ -116,6 +129,8 @@ public class CalcMain extends AppCompatActivity implements View.OnClickListener 
                     toSolve += "5";
                 break;
             case R.id.six:
+                if (enter == true)
+                    break;
                 if (toSolve.equals("0"))
                     toSolve = "6";
                 else if(toSolve.length() > 1 && toSolve.endsWith(" 0"))
@@ -124,6 +139,8 @@ public class CalcMain extends AppCompatActivity implements View.OnClickListener 
                     toSolve += "6";
                 break;
             case R.id.seven:
+                if (enter == true)
+                    break;
                 if (toSolve.equals("0"))
                     toSolve = "7";
                 else if(toSolve.length() > 1 && toSolve.endsWith(" 0"))
@@ -132,6 +149,8 @@ public class CalcMain extends AppCompatActivity implements View.OnClickListener 
                     toSolve += "7";
                 break;
             case R.id.eight:
+                if (enter == true)
+                    break;
                 if (toSolve.equals("0"))
                     toSolve = "8";
                 else if(toSolve.length() > 1 && toSolve.endsWith(" 0"))
@@ -140,6 +159,8 @@ public class CalcMain extends AppCompatActivity implements View.OnClickListener 
                     toSolve += "8";
                 break;
             case R.id.nine:
+                if (enter == true)
+                    break;
                 if (toSolve.equals("0"))
                     toSolve = "9";
                 else if(toSolve.length() > 1 && toSolve.endsWith(" 0"))
@@ -148,30 +169,40 @@ public class CalcMain extends AppCompatActivity implements View.OnClickListener 
                     toSolve += "9";
                 break;
             case R.id.plus:
+                if (enter == true)
+                    enter = false;
                 if (!toSolve.endsWith(" "))
                     toSolve += " + ";
                 else
                     toSolve = toSolve.substring(0, toSolve.length()-3) + " + ";
                 break;
             case R.id.mul:
+                if (enter == true)
+                    enter = false;
                 if (!toSolve.endsWith(" "))
                     toSolve += " * ";
                 else
                     toSolve = toSolve.substring(0, toSolve.length()-3) + " * ";
                 break;
             case R.id.minus:
+                if (enter == true)
+                    enter = false;
                 if (!toSolve.endsWith(" "))
                     toSolve += " - ";
                 else
                     toSolve = toSolve.substring(0, toSolve.length()-3) + " - ";
                 break;
             case R.id.div:
+                if (enter == true)
+                    enter = false;
                 if (!toSolve.endsWith(" "))
                     toSolve += " / ";
                 else
                     toSolve = toSolve.substring(0, toSolve.length()-3) + " / ";
                 break;
             case R.id.del:
+                if (enter == true)
+                    enter = false;
                 toSolve = "";
                 break;
             case R.id.dec:
@@ -189,6 +220,7 @@ public class CalcMain extends AppCompatActivity implements View.OnClickListener 
         setText();
 
     }
+
 
     public void solving(){
         Deque<Double> nums = new ArrayDeque<Double>();
@@ -214,13 +246,14 @@ public class CalcMain extends AppCompatActivity implements View.OnClickListener 
             double num1 = nums.pop();
             double num2 = nums.pop();
             String op = ops.pop();
-            double result = getResult(num2, num1, op);
+            double result = getResult(num1, num2, op);
             nums.add(result);
         }
         Double finalResult = nums.pop();
         toSolve = finalResult.toString();
         if (toSolve.endsWith(".0"))
             toSolve = toSolve.substring(0, toSolve.length()-2);
+        enter = true;
     }
 
     public double getResult(double num1, double num2, String op){
