@@ -206,10 +206,8 @@ public class CalcMain extends AppCompatActivity implements View.OnClickListener 
                 toSolve = "";
                 break;
             case R.id.dec:
-                if (toSolve.isEmpty() || toSolve.substring(toSolve.length()-1) == " ")
-                    toSolve = "0.";
-                else
-                    toSolve += ".";
+                toSolve += ".";
+                enter = false;
                 break;
             case R.id.equal:
                 solving();
