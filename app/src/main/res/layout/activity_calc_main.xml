@@ -105,7 +105,7 @@
             android:layout_height="match_parent"
             android:layout_weight=".25"
             android:textSize="40sp"
-            android:text="/"
+            android:text="\u00f7"
             android:clickable="true"
             android:backgroundTint="#4c4545" />
 
@@ -153,7 +153,7 @@
             android:layout_height="match_parent"
             android:layout_weight=".25"
             android:textSize="40sp"
-            android:text="x"
+            android:text="\u00d7"
             android:clickable="true"
             android:backgroundTint="#4c4545" />
 
@@ -201,7 +201,7 @@
             android:layout_height="match_parent"
             android:layout_weight=".25"
             android:textSize="40sp"
-            android:text="-"
+            android:text="\u2212"
             android:clickable="true"
             android:backgroundTint="#4c4545" />
 
